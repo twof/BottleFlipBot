@@ -4,14 +4,23 @@ import cv2
 import imutils
 
 image = cv2.imread("screen.jpg")
-print(image)
+#print(image)
 
 # Initiate FAST object with default values
 fast = cv2.FastFeatureDetector_create()
 
 # find and draw the keypoints
 kp = fast.detect(image, None)
+
+max=kp[0].pt
+for i in kp:
+	if i.pt[1]>max[1]:
+		max=i.pt
+
+print(max)
+
 img2 = image
+
 cv2.drawKeypoints(image, kp, color=(255,0,0), outImage=img2)
 
 # Print all default params
